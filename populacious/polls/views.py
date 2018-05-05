@@ -9,28 +9,14 @@ from datetime import timedelta
 from .models import Vote, Poll
 
 
-class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
-    context_object_name = 'polls_list'
+def index(request, name="jack"):
+	if request.method == "POST":
+		request.session["button"] = request.POST
+		name = request.POST.get("button")
+	return render(request, 'polls/index.html', {"name": name})
 
-    def get_queryset(self):
-        """Return the last five published questions."""
-        #return Poll.objects.order_by('-start_time')[:5]
-        return Poll.objects.all()
-
-
-class DetailView(generic.DetailView):
-    model = Poll
-    template_name = 'polls/detail.html'
-
-
-class ResultsView(generic.DetailView):
-    model = Poll
-    template_name = 'polls/results.html'
-
-
-def vote(request, question_id):
-    question = get_object_or_404(Poll, pk=question_id)
+def vote(request, name):
+    question = get_object_or_404(Poll, name=name)
     try:
         selected_choice = question.vote_set.get(pk=request.POST['choice'])
     except (KeyError, Vote.DoesNotExist):
@@ -49,13 +35,3 @@ def vote(request, question_id):
 		
 def submit(request):
     return render(request, 'polls/submit.html', {})
-	
-def done(request):
-	Poll(vote_area=request.POST['area'],
-        start_time=timezone.now(),
-        end_time=timezone.now() + timedelta(days=7),
-        poll_type=request.POST['type'],
-        title=request.POST['title'],
-        question=request.POST['question'],
-        values=request.POST['values']).save()
-	return render(request, 'polls/done.html')

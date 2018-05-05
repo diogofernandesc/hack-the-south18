@@ -3,17 +3,15 @@
 <h2>Twitter. Unspoiled.</h2>
 
 <body>
-<a class="twitter-timeline" href="https://twitter.com/jack?ref_src=twsrc%5Etfw">Tweets by jack</a> 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-</body>
-</html>
-<!--
-<form action={% url 'polls:index' %} method="post">
+<form action={% url 'polls:index'  %} method="post">
 {% csrf_token %}
 <p>
 	Remove spoilers from: @
-	<input type="text" name="name"/>
+	<input type="text" name="button"/>
 </p>
 <input type="submit" value="Update"/>
+<a class="twitter-timeline" href="https://twitter.com/{{name}}?ref_src=twsrc%5Etfw">Tweets by {{name}}</a> 
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 </form>
-</body>--!>
+</body>
+</html>
