@@ -1,22 +1,19 @@
-<h1>Populacious</h1>
-<h2>Account</h2>
-<h3><a href=#>Sign Up [unavailable]</a></h3>
-<h3><a href=#>Log In [unavailable]</a></h3>
-<h2>Polls</h2>
-<h3><a href={% url 'polls:submit' %}>Submit a Poll [in progress]</a></h3>
-<h3>Vote</h3>
+<html>
+<h1>Spock</h1>
+<h2>Twitter. Unspoiled.</h2>
 
-{% if polls_list %}
-    <ul>
-    {% for poll in polls_list %}
-        <li>
-			<h3>
-				<a href="{% url 'polls:detail' poll.id %}">{{ poll.title }}</a>
-			</h3>
-			{{ poll.question }}
-		</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<body>
+<a class="twitter-timeline" href="https://twitter.com/jack?ref_src=twsrc%5Etfw">Tweets by jack</a> 
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+</body>
+</html>
+<!--
+<form action={% url 'polls:index' %} method="post">
+{% csrf_token %}
+<p>
+	Remove spoilers from: @
+	<input type="text" name="name"/>
+</p>
+<input type="submit" value="Update"/>
+</form>
+</body>--!>
